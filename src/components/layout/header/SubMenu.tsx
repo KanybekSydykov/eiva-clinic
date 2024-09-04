@@ -4,7 +4,7 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import React, { useState } from "react";
 
-const SubMenu = () => {
+const SubMenu = ({ closeMenu ,categories}: { closeMenu: () => void,categories:any }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Box
@@ -73,54 +73,25 @@ const SubMenu = () => {
         opacity={isOpen ? 1 : 0}
         transition={"all .3s ease"}
       >
-        <Link
-          href={"/"}
-          style={{
-            textDecoration: "none",
-            fontFamily: "var(--chakra-fonts-mulish)",
-            color: "rgba(6, 51, 52, 1)",
-            fontSize: "16px",
-            fontWeight: "400",
-          }}
-        >
-          Ведение беременности
-        </Link>
-        <Link
-          href={"/"}
-          style={{
-            textDecoration: "none",
-            fontFamily: "var(--chakra-fonts-mulish)",
-            color: "rgba(6, 51, 52, 1)",
-            fontSize: "16px",
-            fontWeight: "400",
-          }}
-        >
-          Оперативная гинекология
-        </Link>
-        <Link
-          href={"/"}
-          style={{
-            textDecoration: "none",
-            fontFamily: "var(--chakra-fonts-mulish)",
-            color: "rgba(6, 51, 52, 1)",
-            fontSize: "16px",
-            fontWeight: "400",
-          }}
-        >
-          Консультативно-диагностическое отделение
-        </Link>
-        <Link
-          href={"/"}
-          style={{
-            textDecoration: "none",
-            fontFamily: "var(--chakra-fonts-mulish)",
-            color: "rgba(6, 51, 52, 1)",
-            fontSize: "16px",
-            fontWeight: "400",
-          }}
-        >
-          Роды и послеродовый период
-        </Link>
+        {categories.map((category: any) => (
+           <Box onClick={closeMenu} key={category.name}>
+
+           <Link
+             href={`/services/${category.slug}`}
+             style={{
+               textDecoration: "none",
+               fontFamily: "var(--chakra-fonts-mulish)",
+               color: "rgba(6, 51, 52, 1)",
+               fontSize: "16px",
+               fontWeight: "400",
+             }}
+           >
+             {category.name}
+           </Link>
+           </Box>
+        ))}
+       
+     
       </Flex>
     </Box>
   );

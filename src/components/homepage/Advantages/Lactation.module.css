@@ -1,0 +1,33 @@
+.head{
+    animation: headMove 5s infinite 3s linear;
+}
+
+.body{
+    animation: bodyMove 5s infinite 3s linear;
+}
+
+@keyframes headMove {
+    0%,100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-3px);
+    }
+    50% {
+        transform: translateX(3px);
+    }
+
+    
+}
+
+@keyframes bodyMove{
+    0%,100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: rotateX(20deg);
+    }
+    50% {
+        transform: rotateX(0deg);
+    }
+}

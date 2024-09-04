@@ -1,0 +1,35 @@
+.heart {
+    animation: heartbeat 2s infinite ease-in-out; /* Reduced time for more noticeable heartbeat effect */
+  }
+  
+  @keyframes heartbeat {
+    0%, 100% {
+      transform: scale(1.2); /* Start and end at a slightly larger size */
+      transform-origin: center; /* Transform from the center */
+    }
+    10%, 90% {
+      transform: scale(1); /* Contract to normal size */
+      transform-origin: center;
+    }
+    30% {
+      transform: scale(1.4); /* Quick initial pulse */
+      transform-origin: 50% 65%;
+    }
+    40% {
+      transform: scale(1.8); /* Stronger second pulse */
+      transform-origin: 50% 65%;
+    }
+    55% {
+      transform: scale(2.1); /* Peak of the heartbeat, slight overshoot */
+      transform-origin: 50% 65%;
+    }
+    60% {
+      transform: scale(1.8); /* Slight contraction after the peak */
+      transform-origin: 50% 65%;
+    }
+    70% {
+      transform: scale(1.5); /* Settling back to a larger size */
+      transform-origin: 50% 65%;
+    }
+  }
+      

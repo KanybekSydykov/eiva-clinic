@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: eiva
+    image: kanadev/eiva:latest
+    ports:
+      - "3016:3016"
+    restart: always

@@ -1,0 +1,16 @@
+body {
+  overflow-x: "hidden";
+}
+
+button {
+    -webkit-tap-highlight-color: transparent; /* Removes tap highlight on mobile WebKit browsers */
+    outline: none; /* Removes focus outline */
+}
+
+main{
+  overflow-x: hidden;
+}
+
+html{
+  scroll-behavior: smooth;
+}

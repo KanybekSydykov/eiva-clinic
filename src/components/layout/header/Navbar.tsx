@@ -3,7 +3,12 @@ import Link from "next/link";
 import React from "react";
 import SubMenu from "./SubMenu";
 
-const Navbar = () => {
+interface Props {
+  closeMenu: () => void;
+  categories: any;
+}
+
+const Navbar = ({ closeMenu,categories }: Props) => {
   return (
     <Flex mt={"122px"} flexDir={{ base: "column", lg: "row" }}>
       <Box
@@ -16,6 +21,7 @@ const Navbar = () => {
         _hover={{
           bg: "lightThinGreen",
         }}
+        onClick={() => closeMenu()}
       >
         <Text
           color={"navbarColor"}
@@ -46,6 +52,8 @@ const Navbar = () => {
         _hover={{
           bg: "lightThinGreen",
         }}
+        onClick={closeMenu}
+
       >
         <Text
           color={"navbarColor"}
@@ -67,7 +75,7 @@ const Navbar = () => {
         />
       </Box>
       {/* menu  */}
-      <SubMenu />
+      <SubMenu closeMenu={closeMenu} categories={categories} />
       {/* menu  */}
 
       <Box
@@ -80,6 +88,7 @@ const Navbar = () => {
         _hover={{
           bg: "lightThinGreen",
         }}
+        onClick={closeMenu}
       >
         <Text
           color={"navbarColor"}
@@ -110,6 +119,7 @@ const Navbar = () => {
         _hover={{
           bg: "lightThinGreen",
         }}
+        onClick={closeMenu}
       >
         <Text
           color={"navbarColor"}
@@ -140,6 +150,7 @@ const Navbar = () => {
         _hover={{
           bg: "lightThinGreen",
         }}
+        onClick={closeMenu}
       >
         <Text
           color={"navbarColor"}
@@ -170,6 +181,8 @@ const Navbar = () => {
         _hover={{
           bg: "lightThinGreen",
         }}
+        onClick={closeMenu}
+
       >
         <Text
           color={"navbarColor"}

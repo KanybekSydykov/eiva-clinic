@@ -5,19 +5,14 @@ import {
   Button,
   Drawer,
   DrawerBody,
-  DrawerCloseButton,
   DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import Navbar from "./Navbar";
 import MenuContacts from "./MenuContacts";
 
-export default function DrawerMenu() {
+export default function DrawerMenu({data}: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <>
       <Button
@@ -31,14 +26,19 @@ export default function DrawerMenu() {
         position={isOpen ? "absolute" : "relative"}
         borderRadius={"50%"}
         _hover={{ bg: "layoutGradient" }}
-        _focus={{ bg: "layoutGradient" }}
-        display={"flex"}
+        _focus={{ bg: "layoutGradient",outline: 'none' }}
+        display={{base:"flex",lg:'none'}}
         justifyContent={"center"}
         alignItems={"center"}
         top={isOpen ? "25px" : "unset"}
         right={isOpen ? "16px" : "unset"}
         zIndex={isOpen ? 1990 : 1}
         transition={"all .01s ease"}
+        _focusVisible={{
+          boxShadow: "none",
+          outline: "none",
+        }}
+        
       >
         <Box
           as="span"
@@ -77,7 +77,7 @@ export default function DrawerMenu() {
       <Drawer isOpen={isOpen} placement="right" onClose={onClose} size={"sm"}>
         <DrawerContent bg={"transparent"}>
           <DrawerBody bg={"rgba(255, 255, 255, 0.8)"} px={"0px"}>
-            <Navbar />
+            <Navbar closeMenu={onClose} categories={data} />
             <MenuContacts />
           </DrawerBody>
         </DrawerContent>

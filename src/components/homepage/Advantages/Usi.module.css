@@ -1,0 +1,50 @@
+.lightOne {
+  opacity: 0;
+  animation: showLight 6s linear infinite;
+}
+
+.lightTwo {
+  opacity: 0;
+  animation: showLightTwo 6s linear infinite;
+}
+
+.lightThree {
+  opacity: 0;
+  animation: showLightThree 6s linear infinite;
+}
+
+@keyframes showLight {
+    0%{
+        opacity: 1;
+    }
+    80%{
+        opacity: 1;
+    }
+    90%, 100% {
+      opacity: 0;
+    }
+}
+
+@keyframes showLightTwo {
+    0%, 20% {
+      opacity: 0;
+    }
+    21% {
+      opacity: 1;
+    }
+    90%,100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes showLightThree {
+    0%, 30% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 1;
+    }
+    90%,100% {
+      opacity: 0;
+    }
+  }
