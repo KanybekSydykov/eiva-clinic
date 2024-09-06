@@ -42,7 +42,7 @@ const ServiceCard = ({ item }: { item: ServiceCardProps }) => {
           right={{ base: "unset", lg: "0px" }}
         >
           <Image
-            src={"/icons/service-img.png"}
+            src={item.image ? item.image : "/icons/service-img.png"}
             alt={"service image"}
             fill
             style={{ objectFit: "cover" }}

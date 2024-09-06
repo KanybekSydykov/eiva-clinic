@@ -20,6 +20,8 @@ const Packages = ({ content }: { content: any }) => {
   const path = usePathname();
   
 
+  console.log(content);
+  
   if (content.length === 0)
     return (
       <Center>

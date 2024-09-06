@@ -123,6 +123,9 @@ export default page;
 async function AboutUsData() {
   const data = await getData(ENDPOINTS.getAboutPageAbout());
 
+  console.log(data);
+  
+
   return (
     <div>
       <AboutUs
@@ -132,9 +135,9 @@ async function AboutUsData() {
         photo={data.image}
       />
       <StatisticsCounters
-        counter1={data.counter_1_value}
-        counter2={data.counter_2_value}
-        counter3={data.counter_3_value}
+        counter1={{title:data.counter_1_title,value:data.counter_1_value}}
+        counter2={{title:data.counter_2_title,value:data.counter_2_value}}
+        counter3={{title:data.counter_3_title,value:data.counter_3_value}}
       />
     </div>
   );

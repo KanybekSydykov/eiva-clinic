@@ -28,6 +28,7 @@ const EivaInput = ({
       borderRadius={"60px"}
       border={"1px solid rgba(208, 213, 221, 1)"}
       background={"rgba(255, 255, 255, 0.6)"}
+      autoComplete="off"
       box-shadow={"0px 1px 2px 0px rgba(16, 24, 40, 0.05)"}
       _hover={{
         boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",

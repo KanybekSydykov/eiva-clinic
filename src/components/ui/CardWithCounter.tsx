@@ -2,7 +2,11 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import CounterAnimation from "./CounterAnimation";
 
-const CardWithCounter = ({ value ,index}: { value: number, index: number }) => {
+const CardWithCounter = ({ value,title ,index}: { title:string,value: number, index: number }) => {
+
+  const firstLetters = title.split(" ").slice(0,2).join(' ');
+  const lastLetter = title.split(" ").slice(-1); 
+
   return (
     <Flex
       w={"100%"}
@@ -21,7 +25,7 @@ const CardWithCounter = ({ value ,index}: { value: number, index: number }) => {
         lineHeight={{ base: "20px", lg: "26px" }}
         color={"darkGreen"}
       >
-        Приняли более
+        {firstLetters}
       </Text>
       <Box
         textAlign={"end"}
@@ -43,7 +47,7 @@ const CardWithCounter = ({ value ,index}: { value: number, index: number }) => {
         lineHeight={{ base: "20px", lg: "26px" }}
         color={"darkGreen"}
       >
-        родов
+        {lastLetter}
       </Text>
     </Flex>
   );

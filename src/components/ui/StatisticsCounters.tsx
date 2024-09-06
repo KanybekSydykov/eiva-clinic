@@ -7,9 +7,9 @@ const StatisticsCounters = ({
   counter2,
   counter3
 }:{
-  counter1:number,
-  counter2:number,
-  counter3:number
+  counter1: { title: string; value: number },
+  counter2: { title: string; value: number },
+  counter3: { title: string; value: number }
 }) => {
   return (
     <Container 
@@ -25,13 +25,13 @@ const StatisticsCounters = ({
         gap="10px"
       >
         <GridItem colSpan={{ base: 1, lg: 1 }}>
-          <CardWithCounter index={0}  value={counter1}/>
+          <CardWithCounter index={0} title={counter1.title}   value={counter1.value}/>
         </GridItem>
         <GridItem colSpan={{ base: 1, lg: 1 }}>
-          <CardWithCounter index={1} value={counter2}/>
+          <CardWithCounter index={1} title={counter2.title} value={counter2.value}/>
         </GridItem>
         <GridItem colSpan={{ base: 1, lg: 2 }}>
-          <CardWithCounter index={2} value={counter3} />
+          <CardWithCounter index={2} title={counter3.title} value={counter3.value} />
         </GridItem>
       </Grid>
     </Container>
