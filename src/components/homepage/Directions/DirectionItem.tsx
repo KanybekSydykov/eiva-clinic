@@ -68,7 +68,7 @@ const DirectionItem = ({
       <Heading color={"darkGreen"} fontWeight={"700"} fontSize={"18px"}>
         {name}
       </Heading>
-      <Text color={"cardText"} fontSize={"16px"} fontWeight={"400"}>
+      <Text color={"cardText"} fontSize={"16px"} fontWeight={"400"} noOfLines={5}>
         {description}
       </Text>
       <Link

@@ -9,16 +9,36 @@ import {
   Flex,
   Button,
   Text,
-  Box
+  Box,
+  Input,
+  Center,
+  Highlight,
 } from "@chakra-ui/react";
 import { ChevronDownIcon, SearchIcon } from "@chakra-ui/icons";
 
 const Prices = ({ prices }: { prices: any }) => {
   const [isVisible, setIsVisible] = useState(true);
 
+  const allPrices = prices.flatMap((price: any) => price.services);
+
+  const [searchResult, setSearchResult] = useState([]);
+
+  const handleSearch = (e: any) => {
+    const searchValue = e.target.value;
+    if (searchValue) {
+      setSearchResult(
+        allPrices.filter((item: any) =>
+          item.name.toLowerCase().includes(searchValue.toLowerCase())
+        )
+      );
+    } else {
+      setSearchResult([]);
+    }
+  };
+
   return (
     <Flex flexDir={"column"} gap={"20px"}>
-      {/* <Flex
+      <Flex
         display={{ base: "none", lg: "flex" }}
         flexDir={"row"}
         h={"51px"}
@@ -31,6 +51,8 @@ const Prices = ({ prices }: { prices: any }) => {
           type="search"
           border={"none"}
           borderRadius={"0px"}
+          w={"100%"}
+          onChange={handleSearch}
           h={"100%"}
           placeholder="Поиск услуг"
           _focus={{
@@ -47,7 +69,7 @@ const Prices = ({ prices }: { prices: any }) => {
         <Center w={"50px"} h={"50px"} bg={"rgba(237, 242, 247, 1)"}>
           <SearchIcon boxSize={"24px"} />
         </Center>
-      </Flex> */}
+      </Flex>
       <Tabs
         width={"100%"}
         display={"flex"}
@@ -95,7 +117,7 @@ const Prices = ({ prices }: { prices: any }) => {
               transform={isVisible ? "rotate(-180deg)" : "rotate(0deg)"}
             />
           </Button>
-{/* 
+          {/* 
           <Flex
             display={{ base: "flex", lg: "none" }}
             flexDir={"row"}
@@ -153,7 +175,7 @@ const Prices = ({ prices }: { prices: any }) => {
           ))}
         </TabList>
 
-        <TabPanels>
+        <TabPanels position={"relative"} maxH={"750px"} overflowY={"auto"}>
           {prices?.map((panel: any) => (
             <TabPanel key={panel.name} pt={{ base: "16px", lg: "0px" }}>
               <Flex flexDir={"column"}>
@@ -199,6 +221,57 @@ const Prices = ({ prices }: { prices: any }) => {
               </Flex>
             </TabPanel>
           ))}
+          {searchResult.length > 0 ? (
+            <Flex flexDir={'column'}
+            position={"absolute"}
+            top={0}
+            right={0}
+            w={"100%"}
+            h={"100%"}
+            background={"#fff"}
+            >
+              <Text
+                textAlign={"center"}
+                fontWeight={"800"}
+                fontSize={"16px"}
+                color={"rgba(88, 88, 88, 1)"}
+              >
+                Найдено услуг {searchResult.length}
+              </Text>
+
+              <Flex
+                maxH={"700px"}
+                overflowY={"auto"}
+                flexDir={"column"}
+              >
+                {searchResult.map((item: any) => (
+                  <Flex
+                    key={item.id}
+                    py={"16px"}
+                    borderBottom={"1px solid rgba(15, 95, 98, 0.1)"}
+                    flexDir={{ base: "column", lg: "row" }}
+                    justifyContent={{ base: "flex-start", lg: "space-between" }}
+                    gap={"20px"}
+                  >
+                    <Text
+                      fontWeight={"600"}
+                      fontSize={"16px"}
+                      color={"rgba(88, 88, 88, 1)"}
+                    >
+                      {item.name}
+                    </Text>
+                    <Text
+                      fontWeight={"800"}
+                      fontSize={"18px"}
+                      color={"rgba(88, 88, 88, 1)"}
+                    >
+                      {item.price}
+                    </Text>
+                  </Flex>
+                ))}
+              </Flex>
+            </Flex>
+          ) : null}
         </TabPanels>
       </Tabs>
     </Flex>

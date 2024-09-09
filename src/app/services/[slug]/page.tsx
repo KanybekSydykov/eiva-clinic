@@ -58,6 +58,9 @@ export default page;
 async function GetServiceData({ params }: { params: { slug: string } }) {
   const data = await getData(ENDPOINTS.getService(params.slug));
 
+  console.log(data);
+  
+
   return (
     <Container
       mt={"100px"}
@@ -109,6 +112,7 @@ async function GetServiceData({ params }: { params: { slug: string } }) {
                   {item.services.length > 0
                     ? item.services[0].items.map(
                         (service: any, index: number) =>
+                          
                           service.image_duration === "left" && (
                             <Flex
                               key={index}
@@ -127,7 +131,7 @@ async function GetServiceData({ params }: { params: { slug: string } }) {
                                 flexShrink={0}
                               >
                                 <Image
-                                  src={service.image}
+                                  src={service.image ? service.image : '/about-img.png'}
                                   alt="image"
                                   fill
                                   sizes="358px 525px"
@@ -170,7 +174,7 @@ async function GetServiceData({ params }: { params: { slug: string } }) {
                               overflow={"hidden"}
                             >
                               <Image
-                                src={service.image}
+                                src={service.image ? service.image : '/about-img.png'}
                                 fill
                                 sizes="@media (max-width: 992px) 358px 170px, @media (min-width: 992px) 858px 425px"
                                 alt="image"

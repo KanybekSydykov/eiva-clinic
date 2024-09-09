@@ -51,7 +51,7 @@ const AboutUs = ({
           <Text
             fontFamily={"mulish"}
             fontWeight={"600"}
-            fontSize={"16px"}
+            fontSize={{base:"16px",lg:'22px'}}
             textAlign={"center"}
             h={"fit-content"}
             color={"subHeading"}
@@ -65,7 +65,8 @@ const AboutUs = ({
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0, transition: { duration: 1 } }}
           viewport={{ amount: 0.9, once: true }}
-          w={{ base: "100%", lg: "60%" }}
+          w={{ base: "100%", lg: "45%" }}
+          flexShrink={0}
           ratio={1}
           borderRadius={{ base: "30px", lg: "50px" }}
           overflow={"hidden"}
@@ -74,8 +75,9 @@ const AboutUs = ({
           <Image
             src={photo}
             fill
-            sizes="@(max-width: 768px) 100%,60%"
+            sizes="@(max-width: 768px) 100%,100%"
             alt="Фото нашей клиники"
+            style={{ objectFit: "cover" }}
           />
         </AspectRatio>
       </Flex>

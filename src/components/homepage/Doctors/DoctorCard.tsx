@@ -64,7 +64,7 @@ const DoctorCard = ({
         }}
       >
         <Image
-          src={image}
+          src={image ? image : "/avatar-placeholder.jpg"}
           alt={name}
           fill
           sizes="100%"
@@ -102,6 +102,7 @@ const DoctorCard = ({
         alignItems={"center"}
         justifyContent={"center"}
         w={"100%"}
+        mt={'auto'}
       >
         <Button variant={"brandPrimary"} position={"relative"}>
           Записаться на прием

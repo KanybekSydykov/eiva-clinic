@@ -77,6 +77,9 @@ async function GetDoctorData({ name }: { name: number }) {
 
   const certificates = splitIntoPairs(data.certificates);
 
+  console.log(certificates);
+  
+
   return (
     <Container
       mt={"100px"}
@@ -113,7 +116,7 @@ async function GetDoctorData({ name }: { name: number }) {
             overflow={"hidden"}
           >
             <Image
-              src={data.image}
+              src={data.image ? data.image : "/avatar-placeholder.jpg"}
               alt={"doctor"}
               fill
               sizes="100%"
@@ -326,20 +329,29 @@ async function GetDoctorData({ name }: { name: number }) {
                         src={item[0].image}
                         alt={"certificate"}
                         fill
-                        sizes={"@(max-width: 992px) 312px,398pxa"}
+                        sizes={"@(max-width: 992px) 312px,398px"}
+                        style={{
+                          objectFit: "cover",
+                        }}
                       />
                     </AspectRatio>
+                    {item[1] &&
+                    
                     <AspectRatio
-                      w={{ base: "312px", xl: "398px" }}
-                      h={{ base: "447px", xl: "571px" }}
+                    w={{ base: "312px", xl: "398px" }}
+                    h={{ base: "447px", xl: "571px" }}
                     >
                       <Image
                         src={item[1].image}
                         alt={"certificate"}
                         fill
-                        sizes={"@(max-width: 992px) 312px,398pxa"}
-                      />
+                        sizes={"@(max-width: 992px) 312px,398px"}
+                        style={{
+                          objectFit: "cover",
+                        }}
+                        />
                     </AspectRatio>
+                      }
                   </Flex>
                 ))}
               </Flex>

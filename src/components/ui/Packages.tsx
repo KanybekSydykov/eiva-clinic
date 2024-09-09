@@ -1,16 +1,7 @@
 "use client";
 
-import {
-  QuestionOutlineIcon,
-} from "@chakra-ui/icons";
-import {
-  Button,
-  Center,
-  Flex,
-  Spinner,
-  Text,
-  Tooltip,
-} from "@chakra-ui/react";
+import { QuestionOutlineIcon } from "@chakra-ui/icons";
+import { Button, Center, Flex, Spinner, Text, Tooltip } from "@chakra-ui/react";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -18,10 +9,9 @@ const Packages = ({ content }: { content: any }) => {
   const [activeTab, setActiveTab] = useState(0);
   const router = useRouter();
   const path = usePathname();
-  
 
   console.log(content);
-  
+
   if (content.length === 0)
     return (
       <Center>
@@ -313,91 +303,122 @@ const Packages = ({ content }: { content: any }) => {
         >
           {activeTab === 0 ? "Стандарт" : activeTab === 1 ? "Комфорт" : "VIP"}
         </Text>
-        {content.services[0].services.map((service: any,index:number) => (
-          <Flex
-            key={index}
-            borderX={"1px solid rgba(218, 228, 214, 0.8)"}
-            flexDir={"row"}
-            bg={"lightGreen"}
-            alignItems={"stretch"}
-            justifyContent={{ base: "space-between", lg: "flex-end" }}
-            gap={{ base: "0px", lg: "40px" }}
-          >
-            <Flex
-              flexDir={"row"}
-              p={"20px 16px"}
-              gap={"10px"}
-              alignItems={"center"}
-              me={{ base: "unset", lg: "auto" }}
-              borderEnd={"1px solid rgba(218, 228, 214, 0.8)"}
+
+        <Flex flexDir={"column"}>
+          {content.services.map((services: any, index: number) => (
+            <Flex 
+            key={services.name}
+            flexDir={'column'}
             >
               <Text
-                maxW={{ base: "164px", lg: "300px" }}
-                fontWeight={"500"}
-                fontSize={"16px"}
+                my={"20px"}
+                fontWeight={"700"}
+                fontSize={"18px"}
                 color={"darkGreen"}
-                minW={"275px"}
               >
-                {service.name}
+                {services.name}
               </Text>
-              <Tooltip
-                label={
-                  service.tooltip
-                    ? service.tooltip
-                    : "Тут должна быть подсказка"
-                }
-              >
-                <QuestionOutlineIcon boxSize={"20px"} />
-              </Tooltip>
-            </Flex>
+              <>
+                {services.services.map((service: any, index: number) => (
+                  <Flex
+                    key={service.id}
+                    borderX={"1px solid rgba(218, 228, 214, 0.8)"}
+                    flexDir={"row"}
+                    bg={"lightGreen"}
+                    alignItems={"stretch"}
+                    justifyContent={{ base: "space-between", lg: "flex-end" }}
+                    gap={{ base: "0px", lg: "40px" }}
+                  >
+                    <Flex
+                      flexDir={"row"}
+                      p={"20px 16px"}
+                      gap={"10px"}
+                      alignItems={"center"}
+                      me={{ base: "unset", lg: "auto" }}
+                      borderEnd={"1px solid rgba(218, 228, 214, 0.8)"}
+                    >
+                      <Text
+                        maxW={{ base: "164px", lg: "300px" }}
+                        fontWeight={"500"}
+                        fontSize={"16px"}
+                        color={"darkGreen"}
+                        minW={"275px"}
+                      >
+                        {service.name}
+                      </Text>
+                      <Tooltip
+                        label={
+                          service.tooltip
+                            ? service.tooltip
+                            : "Тут должна быть подсказка"
+                        }
+                      >
+                        <QuestionOutlineIcon boxSize={"20px"} />
+                      </Tooltip>
+                    </Flex>
 
-            <Center
-              className="standard"
-              width={{ base: "128px", lg: "280px" }}
-              display={{
-                base: `${activeTab === 0 ? "flex" : "none"}`,
-                lg: "flex",
-              }}
-              borderEnd={{
-                base: "none",
-                lg: "1px solid rgba(218, 228, 214, 0.8)",
-              }}
-            >
-              <Text fontWeight={"500"} fontSize={"18px"} color={"darkGreen"}>
-                {service.price ? service.price : "-"}
-              </Text>
-            </Center>
-            <Center
-              width={{ base: "128px", lg: "280px" }}
-              borderEnd={{
-                base: "none",
-                lg: "1px solid rgba(218, 228, 214, 0.8)",
-              }}
-              display={{
-                base: `${activeTab === 1 ? "flex" : "none"}`,
-                lg: "flex",
-              }}
-            >
-              <Text fontWeight={"500"} fontSize={"18px"} color={"darkGreen"}>
-                {service.price_comfort ? service.price_comfort : "-"}
-              </Text>
-            </Center>
-            {content.packages[0].name_vip ?
-                 <Center
-                 width={{ base: "128px", lg: "280px" }}
-                 display={{
-                   base: `${activeTab === 2 ? "flex" : "none"}`,
-                   lg: "flex",
-                 }}
-               >
-                 <Text fontWeight={"500"} fontSize={"18px"} color={"darkGreen"}>
-                   {service.price_vip ? service.price_vip : "-"}
-                 </Text>
-               </Center> : null  
-          }
-     
-          </Flex>
-        ))}
+                    <Center
+                      className="standard"
+                      width={{ base: "128px", lg: "280px" }}
+                      display={{
+                        base: `${activeTab === 0 ? "flex" : "none"}`,
+                        lg: "flex",
+                      }}
+                      borderEnd={{
+                        base: "none",
+                        lg: "1px solid rgba(218, 228, 214, 0.8)",
+                      }}
+                    >
+                      <Text
+                        fontWeight={"500"}
+                        fontSize={"18px"}
+                        color={"darkGreen"}
+                      >
+                        {service.price ? service.price : "-"}
+                      </Text>
+                    </Center>
+                    <Center
+                      width={{ base: "128px", lg: "280px" }}
+                      borderEnd={{
+                        base: "none",
+                        lg: "1px solid rgba(218, 228, 214, 0.8)",
+                      }}
+                      display={{
+                        base: `${activeTab === 1 ? "flex" : "none"}`,
+                        lg: "flex",
+                      }}
+                    >
+                      <Text
+                        fontWeight={"500"}
+                        fontSize={"18px"}
+                        color={"darkGreen"}
+                      >
+                        {service.price_comfort ? service.price_comfort : "-"}
+                      </Text>
+                    </Center>
+                    {content.packages[0].name_vip ? (
+                      <Center
+                        width={{ base: "128px", lg: "280px" }}
+                        display={{
+                          base: `${activeTab === 2 ? "flex" : "none"}`,
+                          lg: "flex",
+                        }}
+                      >
+                        <Text
+                          fontWeight={"500"}
+                          fontSize={"18px"}
+                          color={"darkGreen"}
+                        >
+                          {service.price_vip ? service.price_vip : "-"}
+                        </Text>
+                      </Center>
+                    ) : null}
+                  </Flex>
+                ))}
+              </>
+            </Flex>
+          ))}
+        </Flex>
 
         {/* <Flex
           borderX={"1px solid rgba(218, 228, 214, 0.8)"}
