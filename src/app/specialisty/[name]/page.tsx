@@ -1,4 +1,7 @@
 import EivaForm from "@/components/common/Form/EivaForm";
+import DoctorCertificates from "@/components/doctorInfo/DoctorCertificates";
+import DoctorReviews from "@/components/doctorInfo/DoctorReviews";
+import DoctorsAtWork from "@/components/doctorInfo/DoctorsAtWork";
 import Slider from "@/components/ui/Slider";
 import { ENDPOINTS } from "@/lib/api";
 import { getData } from "@/lib/getData";
@@ -12,42 +15,42 @@ import {
   Text,
 } from "@chakra-ui/react";
 import Image from "next/image";
+import Link from "next/link";
 import React, { Suspense } from "react";
 
 const page = ({ params }: { params: { name: number } }) => {
   return (
     <>
-    <Suspense
-      fallback={
-        <Container
-          h="100vh"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          maxW={{ base: "100%", lg: "1280px" }}
-        >
-          <Spinner size="xl" color="heading" />
-        </Container>
-      }
-    >
-      <GetDoctorData name={params.name} />
-    </Suspense>
-    <Suspense
-      fallback={
-        <Container
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          maxW={{ base: "100%", lg: "1280px" }}
-        >
-          <Spinner size="xl" color="heading" />
-        </Container>
-      }
-    >
-      <GetFormImages />
-    </Suspense>
+      <Suspense
+        fallback={
+          <Container
+            h="100vh"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            maxW={{ base: "100%", lg: "1280px" }}
+          >
+            <Spinner size="xl" color="heading" />
+          </Container>
+        }
+      >
+        <GetDoctorData name={params.name} />
+      </Suspense>
+      <Suspense
+        fallback={
+          <Container
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            maxW={{ base: "100%", lg: "1280px" }}
+          >
+            <Spinner size="xl" color="heading" />
+          </Container>
+        }
+      >
+        <GetFormImages />
+      </Suspense>
     </>
-
   );
 };
 
@@ -56,28 +59,8 @@ export default page;
 async function GetDoctorData({ name }: { name: number }) {
   "use server";
   const data = await getData(ENDPOINTS.getDoctorInfo(name));
-  interface Certificate {
-    name: string;
-    image: string;
-  }
 
-  function splitIntoPairs(arr: Certificate[]): Certificate[][] {
-    return arr.reduce(
-      (result: Certificate[][], item: Certificate, index: number) => {
-        if (index % 2 === 0) {
-          result.push([item]);
-        } else {
-          result[result.length - 1].push(item);
-        }
-        return result;
-      },
-      []
-    );
-  }
 
-  const certificates = splitIntoPairs(data.certificates);
-
-  console.log(certificates);
   
 
   return (
@@ -148,13 +131,23 @@ async function GetDoctorData({ name }: { name: number }) {
               Проконсультируем Вас по телефону или запишем на прием к лучшим
               специалистам
             </Text>
-            <Button variant={"brandPrimary"} h={"70px"} mt={"4px"}>
+            <Button variant={"brandPrimary"} h={"70px"} position={"relative"}>
               Записаться на прием
+              <Link
+                href={`?doctor=${name}#form`}
+                style={{
+                  position: "absolute",
+                  top: "0",
+                  left: "0",
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
             </Button>
           </Flex>
         </Flex>
 
-        <Flex flexDir={"column"} gap={"30px"}>
+        <Flex flexDir={"column"} gap={"30px"} flexGrow={1}>
           <Flex
             flexDir={"column"}
             gap={"20px"}
@@ -183,8 +176,18 @@ async function GetDoctorData({ name }: { name: number }) {
             w={"100%"}
             display={{ base: "flex", lg: "none" }}
           >
-            <Button variant={"brandPrimary"} h={"70px"}>
+            <Button variant={"brandPrimary"} h={"70px"} position={"relative"}>
               Записаться на прием
+              <Link
+                href={`?doctor=${name}#form`}
+                style={{
+                  position: "absolute",
+                  top: "0",
+                  left: "0",
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
             </Button>
           </Flex>
 
@@ -277,85 +280,7 @@ async function GetDoctorData({ name }: { name: number }) {
               </Flex>
             </Flex>
 
-            {/* Certificates */}
-            <Flex flexDir={"column"} gap={{ base: "16px", lg: "40px" }}>
-              <Flex flexDir={"row"} gap={"20px"}>
-                <AspectRatio
-                  pos={"relative"}
-                  w={"40px"}
-                  h={"40px"}
-                  ratio={1}
-                  flexShrink={0}
-                >
-                  <Image
-                    src={"/icons/doc-cert-icon.svg"}
-                    alt="attribute icon"
-                    fill
-                    sizes="40px "
-                  />
-                </AspectRatio>
-                <Flex flexDir={"column"} gap={"6px"}>
-                  <Text
-                    fontWeight={"500"}
-                    fontSize={"16px"}
-                    color={"rgba(101, 101, 101, 1)"}
-                  >
-                    Дипломы и сертификаты
-                  </Text>
-                </Flex>
-              </Flex>
-              <Flex
-                flexDir={{ base: "column", lg: "row" }}
-                justifyContent={"center"}
-                alignItems={"center"}
-                gap={"16px"}
-              >
-                {certificates.map((item, index) => (
-                  <Flex
-                    key={index}
-                    flexDir={{
-                      base: "column",
-                      lg: `${
-                        (index + 1) % 2 === 0 ? "column" : "column-reverse"
-                      }`,
-                    }}
-                    gap={"16px"}
-                  >
-                    <AspectRatio
-                      w={{ base: "312px", xl: "398px" }}
-                      h={{ base: "215px", xl: "274px" }}
-                    >
-                      <Image
-                        src={item[0].image}
-                        alt={"certificate"}
-                        fill
-                        sizes={"@(max-width: 992px) 312px,398px"}
-                        style={{
-                          objectFit: "cover",
-                        }}
-                      />
-                    </AspectRatio>
-                    {item[1] &&
-                    
-                    <AspectRatio
-                    w={{ base: "312px", xl: "398px" }}
-                    h={{ base: "447px", xl: "571px" }}
-                    >
-                      <Image
-                        src={item[1].image}
-                        alt={"certificate"}
-                        fill
-                        sizes={"@(max-width: 992px) 312px,398px"}
-                        style={{
-                          objectFit: "cover",
-                        }}
-                        />
-                    </AspectRatio>
-                      }
-                  </Flex>
-                ))}
-              </Flex>
-            </Flex>
+            <DoctorCertificates data={data} />
             {/* Addition info */}
             <Flex flexDir={"row"} gap={"20px"}>
               <AspectRatio
@@ -393,60 +318,8 @@ async function GetDoctorData({ name }: { name: number }) {
           </Flex>
         </Flex>
       </Flex>
-
-      <Flex
-        flexDir={"column"}
-        justifyContent={"center"}
-        mt={"100px"}
-        gap={{ base: "30px", lg: "50px" }}
-      >
-        <Heading
-          variant={"title"}
-          fontSize={{ base: "20px", lg: "32px" }}
-          textAlign={"center"}
-        >
-          Отзывы пациентов
-        </Heading>
-        <Slider
-          perPage={2.3}
-          ratio={9 / 16}
-          maxHeight="630px"
-          lg={3}
-          xl={4}
-          xxl={5}
-          images={data.reviews}
-        />
-      </Flex>
-
-      <Flex flexDir={"column"} mt={"100px"} gap={{ base: "30px", lg: "50px" }}>
-        <Heading
-          variant={"title"}
-          fontSize={{ base: "20px", lg: "32px" }}
-          textAlign={"center"}
-        >
-          Специалист на рабочем месте
-        </Heading>
-
-        <Flex flexDir={{ base: "column", lg: "row" }} mt={"20px"} gap={"10px"}>
-          {data.photos.map((item: { image: string }, index: number) => (
-            <AspectRatio
-              w={{ base: "351px", lg: "425px" }}
-              h={{ base: "474px", lg: "568px" }}
-              pos={"relative"}
-              borderRadius={{ base: "30px", lg: "50px" }}
-              overflow={"hidden"}
-              key={index}
-            >
-              <Image
-                src={item.image}
-                alt={"doctor"}
-                fill
-                sizes={"@(max-width: 992px) 351px,425px"}
-              />
-            </AspectRatio>
-          ))}
-        </Flex>
-      </Flex>
+      <DoctorReviews reviews={data.reviews} />
+      <DoctorsAtWork data={data} />
     </Container>
   );
 }
@@ -455,5 +328,9 @@ async function GetFormImages() {
   "use server";
   const data = await getData(ENDPOINTS.getFormBackgrounds());
 
-  return <EivaForm bg={data.doctors_background ? data.doctors_background : "/form-bg.jpeg"} />;
+  return (
+    <EivaForm
+      bg={data.doctors_background ? data.doctors_background : "/form-bg.jpeg"}
+    />
+  );
 }

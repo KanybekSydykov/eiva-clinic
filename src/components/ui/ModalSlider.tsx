@@ -11,6 +11,7 @@ import {
   ModalContent,
   ModalCloseButton,
   ModalBody,
+  Text,
 } from "@chakra-ui/react";
 // @ts-ignore
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
@@ -30,6 +31,8 @@ interface ModalSliderProps {
   isOpen: boolean;
   onClose: () => void;
   index?: number;
+  title?: string;
+  contain?: boolean;
 }
 
 const ModalSlider = ({
@@ -37,10 +40,11 @@ const ModalSlider = ({
   index = 0,
   isOpen,
   onClose,
+  title,
+  contain = false,
 }: ModalSliderProps) => {
-
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} finalFocusRef={undefined}>
       <ModalOverlay />
       <ModalContent
         width={"90vw"}
@@ -49,15 +53,12 @@ const ModalSlider = ({
         maxW={{ base: "100%", lg: "900px" }}
         maxH={{ base: "100%", lg: "900px" }}
       >
-        <ModalCloseButton
-          zIndex={2}
-          top={{ base: "0px", lg: "16px" }}
-          right={{ base: "0px", lg: "16px" }}
-        />
+        <ModalCloseButton zIndex={2} top={"0px"} right={"0px"} />
         <ModalBody
           padding={{ base: "32px 16px", lg: "30px" }}
-          h={"fit-content"}
+          minH={{ base: "90vh", lg: "fit-content" }}
           display={"flex"}
+          flexDir={"column"}
           justifyContent={"center"}
           position={"relative"}
         >
@@ -72,21 +73,20 @@ const ModalSlider = ({
               start: index,
               keyboard: "global",
             }}
-            w={{ base: "100%", lg: "750px" }}
-            h={{ base: "100%", lg: "750px" }}
+            w={{ base: "100%", lg: "100%" }}
+            h={{ base: "100%", lg: "100%" }}
             pb={{ base: "32px", lg: "0px" }}
           >
-            <Box as={SplideTrack} w={"100%"} h={"100%"}>
+            <Box as={SplideTrack} w={"100%"} h={"90%"}>
               {images.map((image, index) => {
-
                 const mediaType = getMediaType(image.image);
 
                 return (
                   <SplideSlide key={index}>
                     <AspectRatio
                       pos={"relative"}
-                      width={{ base: "100%", lg: "750px" }}
-                      ratio={1}
+                      width={{ base: "100%", lg: "100%" }}
+                      ratio={{ base: 1 / 1.5, lg: 1 }}
                     >
                       {mediaType === "video" ? (
                         <video
@@ -104,8 +104,10 @@ const ModalSlider = ({
                           src={image.image ? image.image : "/about-img.png"}
                           alt="slider-img"
                           fill
-                          sizes="@(max-width: 992px) 350px,750px"
-                          style={{ objectFit: "cover" }}
+                          sizes="@(max-width: 992px) 390px,750px"
+                          style={{
+                            objectFit: contain ? "contain" : "cover",
+                          }}
                         />
                       )}
                     </AspectRatio>
@@ -180,6 +182,18 @@ const ModalSlider = ({
               </Button>
             </Flex>
           </Box>
+          {title ? (
+            <Text
+              position={"absolute"}
+              bottom={{ base: "20px", lg: "50px" }}
+              left={"50%"}
+              transform={"translateX(-50%)"}
+              fontSize={"20px"}
+              textAlign={"center"}
+            >
+              {title}
+            </Text>
+          ) : null}
         </ModalBody>
       </ModalContent>
     </Modal>

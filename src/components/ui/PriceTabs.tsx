@@ -121,12 +121,12 @@ const PriceTabs = ({content}: {content: any}) => {
         <Button h={"70px"} variant={"brandSecondary"} w={'auto'} maxW={'unset'} px={'15px'}>
         <Text>Скачать документ с пакетом тарифов на роды</Text>{" "}
         <DownloadIcon ms={"10px"} />
-        <Link href={content[0].packeges[0].all_packaes ? content[0].packeges[0].all_packages : '/docs/packages.pdf'} target={"_blank"}  style={{position:"absolute",top:"0",left:"0",width:"100%",height:"100%"}}/>
+        <Link href={content[0].packeges[0].all_packages ? content[0].packeges[0].all_packages : '/docs/packages.pdf'} target={"_blank"}  style={{position:"absolute",top:"0",left:"0",width:"100%",height:"100%"}}/>
         </Button>
         <Button h={"70px"} variant={"brandPrimary"} w={'auto'} maxW={'unset'} px={'15px'}>
         <Text>Скачать документ с пакетом ведения беременности</Text>{" "}
         <DownloadIcon ms={"10px"} />
-        <Link  href={content[0].packeges[0].all_packaes ? content[0].packeges[0].package_for_pregnancy : 'docs/packages.pdf'} target={"_blank"}  style={{position:"absolute",top:"0",left:"0",width:"100%",height:"100%"}}/>
+        <Link  href={content[0].packeges[0].package_for_pregnancy ? content[0].packeges[0].package_for_pregnancy : 'docs/packages.pdf'} target={"_blank"}  style={{position:"absolute",top:"0",left:"0",width:"100%",height:"100%"}}/>
         </Button>
       </Flex>
       </Flex>

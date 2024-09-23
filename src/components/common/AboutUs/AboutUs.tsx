@@ -17,6 +17,9 @@ const AboutUs = ({
   description: string;
   photo?: string;
 }) => {
+
+  console.log(photo);
+  
   return (
     <Container
     maxW={{

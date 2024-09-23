@@ -4,7 +4,8 @@ import CounterAnimation from "./CounterAnimation";
 
 const CardWithCounter = ({ value,title ,index}: { title:string,value: number, index: number }) => {
 
-  const firstLetters = title.split(" ").slice(0,2).join(' ');
+  const length = title.split(" ").length;
+  const firstLetters = title.split(" ").slice(0,length - 1).join(' ');
   const lastLetter = title.split(" ").slice(-1); 
 
   return (
