@@ -18,6 +18,7 @@ interface SliderProps {
   xl?: number;
   xxl?: number;
   images?: SlideImageProps[];
+  cover?: boolean
 }
 
 const Slider = ({
@@ -28,6 +29,7 @@ const Slider = ({
   xl = 1,
   images = [],
   xxl = 1,
+  cover = true
 }: SliderProps) => {
   return (
     <Box
@@ -75,7 +77,7 @@ const Slider = ({
                     alt="slider-img"
                     fill
                     sizes="@(max-width: 992px) 100vw, 390px"
-                    style={{ objectFit: "cover", borderRadius: "20px" }}
+                    style={{ objectFit: cover ? 'cover' : "contain", borderRadius: "20px" }}
                   />
                 ) : mediaType === "video" ? (
                   <video

@@ -81,18 +81,23 @@ function handleModalSlider(index: number) {
                 {data.certificates.map((item: any, index: number) => (
                   <AspectRatio
                     key={index}
-                    w={{ base: "100%", xl: "auto" }}
+                    w={{ base: "100%", xl: "100%" }}
+                    h={'auto'}
                     maxH={"447px"}
-                    minH={'300px'}
+                    overflow={"hidden"}
+                    // minH={'300px'}
                     onClick={() => handleModalSlider(index)}
                   >
                     <Image
                       src={item.image}
                       alt={"certificate"}
-                      fill
+                      width={300}
+                      height={300}
                       sizes={"@(max-width: 992px) 312px,398px"}
                       style={{
-                        objectFit: "cover",
+                        objectFit: "contain",
+                        height: "auto",
+                        maxHeight: "447px",
                       }}
                       onClick={onOpen}
                     />

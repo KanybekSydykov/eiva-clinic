@@ -56,7 +56,7 @@ async function GetServiceData({ params }: { params: { slug: string } }) {
       pb="60px"
     >
       <Tabs position="relative" variant="unstyled" defaultIndex={0}>
-        <TabList flexWrap="nowrap" overflowX="auto" sx={{ scrollbarWidth: "none" }}>
+        <TabList flexWrap="nowrap" overflowX="auto" >
           {data.types.map((item: any, index: number) => (
             <Tab
               key={index}
