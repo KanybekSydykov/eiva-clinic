@@ -95,9 +95,9 @@ const Footer = async () => {
         >
           График работы
         </Text>
-        <Box mt={"14px"}>Пн-пт {data.working_hours_weekdays ? data.working_hours_weekdays : "Нет данных"}</Box>
-        <Box>Поликлиника {data.working_hours_weekend ? data.working_hours_weekend : "Нет данных"}</Box>
-        <Box>Стационар 24/7</Box>
+        <Box mt={"14px"}>{data.working_hours_weekdays ? data.working_hours_weekdays : "Нет данных"}</Box>
+        <Box>{data.working_hours_polyclinic ? data.working_hours_polyclinic : "Нет данных"}</Box>
+        <Box>{data.working_hours_sticionar ? data.working_hours_sticionar : "Нет данных"}</Box>
       </Flex>
 
       <Flex flexDir={"column"} gap={"20px"}>

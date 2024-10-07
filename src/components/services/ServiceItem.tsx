@@ -15,7 +15,7 @@ const ServiceItem = ({
     alignItems="center"
     justifyContent="center"
   >
-{  service.image && <>
+{  service.image && <div>
     {getMediaType(service.image) === "image" ? (
       <AspectRatio ratio={358 / 525} width="358px" flexShrink={0}>
         <Image
@@ -35,7 +35,7 @@ const ServiceItem = ({
         src={service.image}
       ></video>
     )}
-    </>}
+    </div>}
 
 
     <Text h="fit-content" fontWeight="600">

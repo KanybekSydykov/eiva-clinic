@@ -11,7 +11,7 @@ const ServiceList = ({ services }: { services: any[] }) => {
     );
   
     return (
-      <>
+      <div>
         <Flex flexDir="column" gap="70px">
           {leftAlignedServices.map((service: any, index: number) => (
             <ServiceItem
@@ -27,7 +27,7 @@ const ServiceList = ({ services }: { services: any[] }) => {
             <ServiceTextItem key={index} service={service} />
           ))}
         </Flex>
-      </>
+      </div>
     );
   };
 
