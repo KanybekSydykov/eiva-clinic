@@ -1,16 +1,28 @@
 "use client";
 
 import { QuestionOutlineIcon } from "@chakra-ui/icons";
-import { Button, Center, Flex, Spinner, Text, Tooltip } from "@chakra-ui/react";
+import {
+  Button,
+  Center,
+  Flex,
+  Grid,
+  GridItem,
+  Spinner,
+  Text,
+  Tooltip,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
+import ControlledTooltip from "./ControlledTooltip";
 
 const Packages = ({ content }: { content: any }) => {
   const [activeTab, setActiveTab] = useState(0);
   const router = useRouter();
   const path = usePathname();
+  const [isDesktop] = useMediaQuery("(min-width: 1024px)");
 
-  console.log(content);
+  console.log(activeTab);
 
   if (content.length === 0)
     return (
@@ -306,10 +318,7 @@ const Packages = ({ content }: { content: any }) => {
 
         <Flex flexDir={"column"}>
           {content.services.map((services: any, index: number) => (
-            <Flex 
-            key={services.name}
-            flexDir={'column'}
-            >
+            <Flex key={services.name} flexDir={"column"}>
               <Text
                 my={"20px"}
                 fontWeight={"700"}
@@ -320,100 +329,144 @@ const Packages = ({ content }: { content: any }) => {
               </Text>
               <>
                 {services.services.map((service: any, index: number) => (
-                  <Flex
+                  <Grid
                     key={service.id}
                     borderX={"1px solid rgba(218, 228, 214, 0.8)"}
-                    flexDir={"row"}
+                    gridTemplateColumns={{
+                      base: "repeat(10, 10%)",
+                      lg: "repeat(5, 20%)",
+                    }} //
                     bg={"lightGreen"}
-                    alignItems={"stretch"}
-                    justifyContent={{ base: "space-between", lg: "flex-end" }}
-                    gap={{ base: "0px", lg: "40px" }}
+                    borderBottom={index === services.services.length - 1 ? "none" : "2px solid rgba(186, 191, 183, 1)"}
                   >
-                    <Flex
-                      flexDir={"row"}
-                      p={"20px 16px"}
-                      gap={"10px"}
-                      alignItems={"center"}
-                      me={{ base: "unset", lg: "auto" }}
-                      borderEnd={"1px solid rgba(218, 228, 214, 0.8)"}
+                    <GridItem
+                      gridColumn={{ base: "span 7", lg: "span 3" }}
                     >
-                      <Text
-                        maxW={{ base: "164px", lg: "300px" }}
-                        fontWeight={"500"}
-                        fontSize={"16px"}
-                        color={"darkGreen"}
-                        minW={"275px"}
-                      >
-                        {service.name}
-                      </Text>
-                      <Tooltip
-                        label={
-                          service.tooltip
-                            ? service.tooltip
-                            : "Тут должна быть подсказка"
-                        }
-                      >
-                        <QuestionOutlineIcon boxSize={"20px"} />
-                      </Tooltip>
-                    </Flex>
-
-                    <Center
-                      className="standard"
-                      width={{ base: "128px", lg: "280px" }}
-                      display={{
-                        base: `${activeTab === 0 ? "flex" : "none"}`,
-                        lg: "flex",
-                      }}
-                      borderEnd={{
-                        base: "none",
-                        lg: "1px solid rgba(218, 228, 214, 0.8)",
-                      }}
-                    >
-                      <Text
-                        fontWeight={"500"}
-                        fontSize={"18px"}
-                        color={"darkGreen"}
-                      >
-                        {service.price ? service.price : "-"}
-                      </Text>
-                    </Center>
-                    <Center
-                      width={{ base: "128px", lg: "280px" }}
-                      borderEnd={{
-                        base: "none",
-                        lg: "1px solid rgba(218, 228, 214, 0.8)",
-                      }}
-                      display={{
-                        base: `${activeTab === 1 ? "flex" : "none"}`,
-                        lg: "flex",
-                      }}
-                    >
-                      <Text
-                        fontWeight={"500"}
-                        fontSize={"18px"}
-                        color={"darkGreen"}
-                      >
-                        {service.price_comfort ? service.price_comfort : "-"}
-                      </Text>
-                    </Center>
-                    {content.packages[0].name_vip ? (
-                      <Center
-                        width={{ base: "128px", lg: "280px" }}
-                        display={{
-                          base: `${activeTab === 2 ? "flex" : "none"}`,
-                          lg: "flex",
-                        }}
+                      <Flex
+                        flexDir={"row"}
+                        p={"20px 16px"}
+                        gap={"10px"}
+                        h={"100%"}
+                        alignItems={"center"}
+                        me={{ base: "unset", lg: "auto" }}
+                        flexGrow={{ base: 1, lg: 1 }}
+                        borderEnd={"1px solid rgba(218, 228, 214, 0.8)"}
                       >
                         <Text
                           fontWeight={"500"}
-                          fontSize={"18px"}
+                          fontSize={"16px"}
                           color={"darkGreen"}
+                          minW={{ base: "164px", lg: "275px" }}
                         >
-                          {service.price_vip ? service.price_vip : "-"}
+                          {service.name}
                         </Text>
-                      </Center>
-                    ) : null}
-                  </Flex>
+                        <ControlledTooltip tooltipText={services.tooltip} />
+                      </Flex>
+                    </GridItem>
+
+                    {/* For mobile: Conditionally render based on the selected tab */}
+                    {!isDesktop && activeTab === 0 && (
+                      <GridItem gridColumn={{ base: "span 3", lg: "span 1" }}>
+                        <Center
+                          className="standard"
+                          width={"100%"}
+                          h={"100%"}
+                          display="flex"
+                          borderEnd={{
+                            base: "none",
+                            lg: "1px solid rgba(218, 228, 214, 0.8)",
+                          }}
+                        >
+                          <Text
+                            className="service-price"
+                            textAlign={"center"}
+                            fontWeight={{ base: "400", lg: "500" }}
+                            fontSize={{ base: "13px", lg: "18px" }}
+                            color={"darkGreen"}
+                          >
+                            {service.price ? service.price : "-"}
+                          </Text>
+                        </Center>
+                      </GridItem>
+                    )}
+
+                    {!isDesktop && activeTab === 1 && (
+                      <GridItem gridColumn={{ base: "span 3", lg: "span 1" }}>
+                        <Center
+                          className="comfort"
+                          width={"100%"}
+                          h={"100%"}
+                          borderEnd={{
+                            base: "none",
+                            lg: "1px solid rgba(218, 228, 214, 0.8)",
+                          }}
+                          display="flex"
+                        >
+                          <Text
+                            fontWeight={{ base: "400", lg: "500" }}
+                            fontSize={{ base: "13px", lg: "18px" }}
+                            color={"darkGreen"}
+                            textAlign={"center"}
+                          >
+                            {service.price_comfort
+                              ? service.price_comfort
+                              : "-"}
+                          </Text>
+                        </Center>
+                      </GridItem>
+                    )}
+
+                    {/* For desktop: Always render both 'standard' and 'comfort' items */}
+                    {isDesktop && (
+                      <>
+                        <GridItem gridColumn={{ base: "span 1", lg: "span 1" }}>
+                          <Center
+                            className="standard"
+                            width={"100%"}
+                            h={"100%"}
+                            display="flex"
+                            borderEnd={{
+                              base: "none",
+                              lg: "1px solid rgba(218, 228, 214, 0.8)",
+                            }}
+                          >
+                            <Text
+                              className="service-price"
+                              textAlign={"center"}
+                              fontWeight={{ base: "400", lg: "500" }}
+                              fontSize={{ base: "15px", lg: "18px" }}
+                              color={"darkGreen"}
+                            >
+                              {service.price ? service.price : "-"}
+                            </Text>
+                          </Center>
+                        </GridItem>
+
+                        <GridItem gridColumn={{ base: "span 1", lg: "span 1" }}>
+                          <Center
+                            className="comfort"
+                            width={"100%"}
+                            h={"100%"}
+                            display="flex"
+                            borderEnd={{
+                              base: "none",
+                              lg: "1px solid rgba(218, 228, 214, 0.8)",
+                            }}
+                          >
+                            <Text
+                              fontWeight={{ base: "400", lg: "500" }}
+                              fontSize={{ base: "15px", lg: "18px" }}
+                              color={"darkGreen"}
+                            >
+                              {service.price_comfort
+                                ? service.price_comfort
+                                : "-"}
+                            </Text>
+                          </Center>
+                        </GridItem>
+                      </>
+                    )}
+                  </Grid>
                 ))}
               </>
             </Flex>

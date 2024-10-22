@@ -105,7 +105,7 @@ const PriceTabs = ({content}: {content: any}) => {
 <Flex
         flexDir={{base:"column",lg:'column'}}
         justifyItems={'center'}
-        gap={"10px"}
+        gap={{base:'16px',lg:'10px'}}
         mt={"40px"}
         mx={{ base: "unset", lg: "auto" }}
         w={'100%'}
@@ -113,18 +113,18 @@ const PriceTabs = ({content}: {content: any}) => {
         alignItems={'center'}
         flexWrap={'wrap'}
       >
-        <Button display={content[0].packeges[0].all_prices ? "flex" : "none"} w={'fit-content'} pos={'relative'} h={"70px"} variant={"brandPrimary"} maxW={'unset'} px={'15px'}>
-          <Text>Скачать документ с прейскурантом</Text>{" "}
+        <Button flexDir={'row'} flexWrap={'wrap'} h={{base:'85px',lg:'70px'}} display={content[0].packeges[0].all_prices ? "flex" : "none"} w={{base:'100%',lg:'auto'}} pos={'relative'} variant={"brandPrimary"} maxW={'unset'} px={'15px'}>
+          <Text whiteSpace={'break-spaces'}>Скачать документ с прейскурантом</Text>{" "}
           <Link href={content[0].packeges[0].all_prices} target={"_blank"}  style={{position:"absolute",top:"0",left:"0",width:"100%",height:"100%"}}/>
           <DownloadIcon ms={"10px"} />
         </Button>
-        <Button h={"70px"} variant={"brandSecondary"} w={'auto'} maxW={'unset'} px={'15px'}>
-        <Text>Скачать документ с пакетом тарифов на роды</Text>{" "}
+        <Button flexDir={'row'} flexWrap={'wrap'} h={{base:'85px',lg:'70px'}} variant={"brandSecondary"} w={{base:'100%',lg:'auto'}} maxW={'unset'} px={'15px'}>
+        <Text whiteSpace={'break-spaces'}>Скачать документ с пакетом тарифов на роды</Text>{" "}
         <DownloadIcon ms={"10px"} />
         <Link href={content[0].packeges[0].all_packages ? content[0].packeges[0].all_packages : '/docs/packages.pdf'} target={"_blank"}  style={{position:"absolute",top:"0",left:"0",width:"100%",height:"100%"}}/>
         </Button>
-        <Button h={"70px"} variant={"brandPrimary"} w={'auto'} maxW={'unset'} px={'15px'}>
-        <Text>Скачать документ с пакетом ведения беременности</Text>{" "}
+        <Button flexDir={'row'} flexWrap={'wrap'} h={{base:'85px',lg:'70px'}} variant={"brandPrimary"} w={{base:'100%',lg:'auto'}} maxW={'unset'} px={'15px'}>
+        <Text whiteSpace={'break-spaces'}>Скачать документ с пакетом ведения беременности</Text>{" "}
         <DownloadIcon ms={"10px"} />
         <Link  href={content[0].packeges[0].package_for_pregnancy ? content[0].packeges[0].package_for_pregnancy : 'docs/packages.pdf'} target={"_blank"}  style={{position:"absolute",top:"0",left:"0",width:"100%",height:"100%"}}/>
         </Button>

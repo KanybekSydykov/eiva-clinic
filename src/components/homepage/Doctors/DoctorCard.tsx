@@ -22,10 +22,10 @@ const DoctorCard = ({
     <Flex as={motion.div}
       variants={childVariants} // Apply the child animation variants
       flexDir={"column"}
-      gap={"30px"}
-      justifyContent={"center"}
+      gap={{base:'12px',lg:'30px'}}
+      justifyContent={"space-between"}
       alignItems={"center"}
-      p={{ base: "20px 10px", lg: "20px" }}
+      p={{ base: "12px 6px", lg: "20px" }}
       w={"100%"}
       maxW={{ base: "300px", lg: "316px" }}
       mx={{ base: "auto", lg: "unset" }}
@@ -77,12 +77,13 @@ const DoctorCard = ({
 
       <Flex
         flexDir={"column"}
-        gap={"20px"}
-        justifyContent={"center"}
+        gap={{base:'12px',lg:'20px'}}
+        justifyContent={'flex-start'}
         alignItems={"center"}
         fontFamily={"mulish"}
         textAlign={"center"}
-        px={"16px"}
+        px={{base:'4px',lg:'16px'}}
+        flexGrow={1}
       >
         <Text fontSize={"18px"} fontWeight={"700"} color={"darkGreen"}>
           {name}
@@ -91,7 +92,7 @@ const DoctorCard = ({
         <Text fontSize={"16px"} fontWeight={"500"} color={"paragraph"}>
           {position}
         </Text>
-        <Text fontSize={"16px"} fontWeight={"500"} color={"paragraph"}>
+        <Text fontSize={{base:'13px',lg:'16px'}} fontWeight={"500"} color={"paragraph"}>
           {specialization}
         </Text>
       </Flex>
@@ -102,7 +103,7 @@ const DoctorCard = ({
         alignItems={"center"}
         justifyContent={"center"}
         w={"100%"}
-        mt={'auto'}
+        mt={{base:'none',lg:'auto'}}
       >
         <Button variant={"brandPrimary"} position={"relative"}>
           Записаться на прием

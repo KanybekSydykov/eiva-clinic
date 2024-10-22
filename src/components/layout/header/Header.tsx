@@ -31,10 +31,12 @@ const Header = () => {
         <AspectRatio
           flexShrink={0}
           position={"relative"}
+          ratio={1052/469}
           w={{ base: "101px", lg: "120px" }}
-          h={{ base: "45px", lg: "53px" }}
+          maxH={'100px'}
+          // h={{ base: "45px", lg: "53px" }}
         >
-          <Image src={"/logo.png"} alt="logo" fill sizes="100%" />
+          <Image src={"/logo.png"} alt="logo" fill sizes="100%" style={{objectFit:'contain'}}/>
         </AspectRatio>
         <Link
           href={"/"}

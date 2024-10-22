@@ -33,8 +33,7 @@ const AccordionElement = ({isLast,isFirst,question,answer} : {isLast?: boolean,i
               />
             </AccordionButton>
           </h2>
-          <AccordionPanel pb={4} whiteSpace={'pre-line'}>
-           {answer}
+          <AccordionPanel pb={4} whiteSpace={'pre-line'} dangerouslySetInnerHTML={{__html: answer}}>
           </AccordionPanel>
         </Box>
       )}

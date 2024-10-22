@@ -28,7 +28,7 @@ const Doctors = ({
       <Heading variant={"title"} fontSize={{ base: "20px", lg: "32px" }}>
         {title}
       </Heading>
-      <StaggerDoctors data={doctors} />
+      <StaggerDoctors data={doctors} hasLink={hasLink} />
       <Flex justifyContent={{ base: "center", lg: "flex-end" }}>
         {hasLink && (
         <ButtonWithArrow link="/specialisty" text="Посмотреть всех специалистов" />

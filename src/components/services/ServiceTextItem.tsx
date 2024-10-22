@@ -1,12 +1,11 @@
-import { AspectRatio, Text } from '@chakra-ui/react';
+import { AspectRatio, Box, Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import React from 'react'
 
 const ServiceTextItem = ({ service }: { service: any }) => (
-    <>
-      <Text fontWeight="600" color="paragraph" whiteSpace="pre-wrap">
-        {service.text}
-      </Text>
+    <Flex className='service-item-right' flexDir={'column'} gap={'24px'}>
+      <Box fontWeight="600" color="paragraph" whiteSpace="pre-wrap" dangerouslySetInnerHTML={{__html: service.text}}>
+      </Box>
   
       <AspectRatio
         ratio={{ base: 358 / 170, lg: 858 / 425 }}
@@ -22,7 +21,7 @@ const ServiceTextItem = ({ service }: { service: any }) => (
           sizes="@media (max-width: 992px) 358px 170px, @media (min-width: 992px) 858px 425px"
         />
       </AspectRatio>
-    </>
+    </Flex>
   );
 
   export default ServiceTextItem

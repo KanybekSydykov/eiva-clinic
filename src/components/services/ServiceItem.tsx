@@ -1,5 +1,5 @@
 import { getMediaType } from "@/lib/defineFileType";
-import { AspectRatio, Flex, Text } from "@chakra-ui/react";
+import { AspectRatio, Box, Flex, Text } from "@chakra-ui/react";
 import Image from "next/image";
 
 const ServiceItem = ({
@@ -10,6 +10,7 @@ const ServiceItem = ({
   reverse: boolean;
 }) => (
   <Flex
+  className="service-item"
     flexDir={{ base: "column", lg: reverse ? "row-reverse" : "row" }}
     gap={{ base: "26px", lg: "80px" }}
     alignItems="center"
@@ -38,9 +39,8 @@ const ServiceItem = ({
     </div>}
 
 
-    <Text h="fit-content" fontWeight="600">
-      {service.text}
-    </Text>
+    <Box h="fit-content" className="text-editor-content" dangerouslySetInnerHTML={{ __html: service.text }}> 
+    </Box>
   </Flex>
 );
 
